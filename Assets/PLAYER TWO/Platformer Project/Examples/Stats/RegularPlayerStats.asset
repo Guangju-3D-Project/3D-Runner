@@ -130,7 +130,7 @@ MonoBehaviour:
   dashDuration: 0.3
   groundDashCoolDown: 0.5
   allowedAirDashes: 1
-  useCustomCollision: 1
+  useCustomCollision: 0
   grindRadiusOffset: 0.26
   minGrindInitialSpeed: 10
   minGrindSpeed: 5

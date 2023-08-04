@@ -16,16 +16,18 @@ namespace PLAYERTWO.PlatformerProject
 		{
 			tag = GameTags.Hazard;
 			m_collider = GetComponent<Collider>();
-			m_collider.isTrigger = !isSolid;
-		}
+			m_collider.isTrigger = false;
+            //m_collider.isTrigger = !isSolid;
+        }
 
 		protected virtual void TryToApplyDamageTo(Player player)
 		{
 			if (!damageOnlyFromAbove || player.velocity.y <= 0 &&
 				player.IsPointUnderStep(m_collider.bounds.max))
 			{
-				player.ApplyDamage(damage);
-			}
+                player.ApplyDamage(damage);
+                m_collider.isTrigger = false;
+            }
 		}
 
 		public virtual void OnEntityContact(Entity entity)
@@ -33,7 +35,8 @@ namespace PLAYERTWO.PlatformerProject
 			if (entity is Player)
 			{
 				TryToApplyDamageTo(entity as Player);
-			}
+                m_collider.isTrigger = false;
+            }
 		}
 
 		protected virtual void OnTriggerStay(Collider other)
@@ -43,8 +46,10 @@ namespace PLAYERTWO.PlatformerProject
 				if (other.TryGetComponent<Player>(out var player))
 				{
 					TryToApplyDamageTo(player);
-				}
-			}
+                    m_collider.isTrigger = false;
+                }
+
+            }
 		}
 	}
 }

@@ -27,6 +27,8 @@ namespace PLAYERTWO.PlatformerProject
 		protected Collider m_collider;
 		protected Camera m_camera;
 
+		public bool IsShow;
+
 		public virtual void Show()
 		{
 			if (!m_showing)
@@ -75,7 +77,16 @@ namespace PLAYERTWO.PlatformerProject
 			m_camera = Camera.main;
 		}
 
-		protected virtual void OnTriggerExit(Collider other)
+        private void Start()
+        {
+            if (IsShow)
+            {
+                Show();
+            }
+
+        }
+
+        protected virtual void OnTriggerExit(Collider other)
 		{
 			if (other.CompareTag(GameTags.Player))
 			{
